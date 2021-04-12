@@ -3,6 +3,7 @@ on:
   push:
     branches: master
   schedule:
+    # see https://www.jianshu.com/p/c6f0f37fde31
     - cron: "0 */3 * * *"
 jobs:
   update-gist:
