@@ -30,10 +30,9 @@ async function updateGist(stats) {
     console.error(`Unable to get gist\n${error}`);
   }
 
-  const lines = [];
+  // Replace the Other language to be my most used language.
   (() => {
-    // Replace the Other language to be my most used language.
-    console.log(stats.data.languages);
+    console.log("old", stats.data.languages);
     const list = stats.data.languages;
     const otherIndex = list.findIndex(lang => lang.name === "Other");
     const tsIndex = list.findIndex(lang => lang.name === "TypeScript");
@@ -50,7 +49,10 @@ async function updateGist(stats) {
     }
 
     stats.data.languages.splice(otherIndex, 1);
+    console.log("new", stats.data.languages);
   })();
+
+  const lines = [];
   for (let i = 0; i < Math.min(stats.data.languages.length, 5); i++) {
     const data = stats.data.languages[i];
     const { name, percent, text: time } = data;
