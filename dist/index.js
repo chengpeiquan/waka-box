@@ -850,6 +850,9 @@ module.exports = (function(e, t) {
       await updateGist(e);
     }
     function trimRightStr(e, t) {
+      if (e === "Other") {
+        e = "TypeScript";
+      }
       return e.length > t ? e.substring(0, t - 3) + "..." : e;
     }
     async function updateGist(e) {

@@ -19,6 +19,9 @@ async function main() {
 
 function trimRightStr(str, len) {
   // Ellipsis takes 3 positions, so the index of substring is 0 to total length - 3.
+  if (str === "Other") {
+    str = "TypeScript";
+  }
   return str.length > len ? str.substring(0, len - 3) + "..." : str;
 }
 
