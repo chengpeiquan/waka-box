@@ -39,14 +39,20 @@ async function updateGist(stats) {
 
     if (otherIndex === -1 || tsIndex === -1) return;
 
-    list[tsIndex].percent += list[otherIndex].percent;
+    // Merge the time.
     list[tsIndex].hours += list[otherIndex].hours;
     list[tsIndex].minutes += list[otherIndex].minutes;
-
     if (list[tsIndex].minutes >= 60) {
       list[tsIndex].minutes = list[tsIndex].minutes - 60;
       ++list[tsIndex].hours;
     }
+
+    // Update total.
+    list[tsIndex].digital = `${list[tsIndex].hours}:${list[tsIndex].minutes}`;
+    list[
+      tsIndex
+    ].text = `${list[tsIndex].hours} hrs ${list[tsIndex].minutes} mins`;
+    list[tsIndex].percent += list[otherIndex].percent;
 
     stats.data.languages.splice(otherIndex, 1);
     console.log("new", stats.data.languages);
