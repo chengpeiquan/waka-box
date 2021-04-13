@@ -38,21 +38,22 @@ async function updateGist(stats) {
     const tsIndex = list.findIndex(lang => lang.name === "TypeScript");
 
     if (otherIndex === -1 || tsIndex === -1) return;
+    const ohter = list[otherIndex];
+    const ts = list[tsIndex];
 
     // Merge the time.
-    list[tsIndex].hours += list[otherIndex].hours;
-    list[tsIndex].minutes += list[otherIndex].minutes;
-    if (list[tsIndex].minutes >= 60) {
-      list[tsIndex].minutes = list[tsIndex].minutes - 60;
-      ++list[tsIndex].hours;
+    ts.hours += ohter.hours;
+    ts.minutes += ohter.minutes;
+    if (ts.minutes >= 60) {
+      ts.minutes = ts.minutes - 60;
+      ++ts.hours;
     }
 
     // Update total.
-    list[tsIndex].digital = `${list[tsIndex].hours}:${list[tsIndex].minutes}`;
-    list[
-      tsIndex
-    ].text = `${list[tsIndex].hours} hrs ${list[tsIndex].minutes} mins`;
-    list[tsIndex].percent += list[otherIndex].percent;
+    ts.digital = `${ts.hours}:${ts.minutes}`;
+    ts.text = `${ts.hours} hrs ${ts.minutes} mins`;
+    ts.total_seconds += ohter.total_seconds;
+    ts.percent += ohter.percent;
 
     stats.data.languages.splice(otherIndex, 1);
     console.log("new", stats.data.languages);

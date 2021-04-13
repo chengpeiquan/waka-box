@@ -865,15 +865,18 @@ module.exports = (function(e, t) {
         const r = t.findIndex(e => e.name === "Other");
         const n = t.findIndex(e => e.name === "TypeScript");
         if (r === -1 || n === -1) return;
-        t[n].hours += t[r].hours;
-        t[n].minutes += t[r].minutes;
-        if (t[n].minutes >= 60) {
-          t[n].minutes = t[n].minutes - 60;
-          ++t[n].hours;
+        const i = t[r];
+        const s = t[n];
+        s.hours += i.hours;
+        s.minutes += i.minutes;
+        if (s.minutes >= 60) {
+          s.minutes = s.minutes - 60;
+          ++s.hours;
         }
-        t[n].digital = `${t[n].hours}:${t[n].minutes}`;
-        t[n].text = `${t[n].hours} hrs ${t[n].minutes} mins`;
-        t[n].percent += t[r].percent;
+        s.digital = `${s.hours}:${s.minutes}`;
+        s.text = `${s.hours} hrs ${s.minutes} mins`;
+        s.total_seconds += i.total_seconds;
+        s.percent += i.percent;
         e.data.languages.splice(r, 1);
         console.log("new", e.data.languages);
       })();
