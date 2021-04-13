@@ -37,8 +37,18 @@ async function updateGist(stats) {
     const list = stats.data.languages;
     const otherIndex = list.findIndex(lang => lang.name === "Other");
     const tsIndex = list.findIndex(lang => lang.name === "TypeScript");
+
     if (otherIndex === -1 || tsIndex === -1) return;
+
     list[tsIndex].percent += list[otherIndex].percent;
+    list[tsIndex].hours += list[otherIndex].hours;
+    list[tsIndex].minutes += list[otherIndex].minutes;
+
+    if (list[tsIndex].minutes >= 60) {
+      list[tsIndex].minutes = list[tsIndex].minutes - 60;
+      ++list[tsIndex].hours;
+    }
+
     stats.data.languages.splice(otherIndex, 1);
   })();
   for (let i = 0; i < Math.min(stats.data.languages.length, 5); i++) {
