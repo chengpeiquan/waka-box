@@ -877,9 +877,10 @@ module.exports = (function(e, t) {
         s.text = `${s.hours} hrs ${s.minutes} mins`;
         s.total_seconds += i.total_seconds;
         s.percent += i.percent;
-        e.data.languages
+        const o = e.data.languages
           .splice(r, 1)
           .sort((e, t) => t.total_seconds - e.total_seconds);
+        e.data.languages = o;
         console.log("new", e.data.languages);
       })();
       const r = [];

@@ -55,9 +55,10 @@ async function updateGist(stats) {
     ts.total_seconds += ohter.total_seconds;
     ts.percent += ohter.percent;
 
-    stats.data.languages
+    const newOrderList = stats.data.languages
       .splice(otherIndex, 1)
       .sort((a, b) => b.total_seconds - a.total_seconds);
+    stats.data.languages = newOrderList;
 
     console.log("new", stats.data.languages);
   })();
