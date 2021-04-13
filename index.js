@@ -19,9 +19,6 @@ async function main() {
 
 function trimRightStr(str, len) {
   // Ellipsis takes 3 positions, so the index of substring is 0 to total length - 3.
-  if (str === "Other") {
-    str = "TypeScript";
-  }
   return str.length > len ? str.substring(0, len - 3) + "..." : str;
 }
 
@@ -37,9 +34,10 @@ async function updateGist(stats) {
   for (let i = 0; i < Math.min(stats.data.languages.length, 5); i++) {
     const data = stats.data.languages[i];
     const { name, percent, text: time } = data;
+    const newName = name === "Other" ? "TypeScript" : name;
 
     const line = [
-      trimRightStr(name, 10).padEnd(10),
+      trimRightStr(newName, 10).padEnd(10),
       time.padEnd(14),
       generateBarChart(percent, 20),
       String(percent.toFixed(1)).padStart(5) + "%"

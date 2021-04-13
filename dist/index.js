@@ -850,9 +850,6 @@ module.exports = (function(e, t) {
       await updateGist(e);
     }
     function trimRightStr(e, t) {
-      if (e === "Other") {
-        e = "TypeScript";
-      }
       return e.length > t ? e.substring(0, t - 3) + "..." : e;
     }
     async function updateGist(e) {
@@ -866,13 +863,14 @@ module.exports = (function(e, t) {
       for (let t = 0; t < Math.min(e.data.languages.length, 5); t++) {
         const n = e.data.languages[t];
         const { name: i, percent: s, text: o } = n;
-        const a = [
-          trimRightStr(i, 10).padEnd(10),
+        const a = i === "Other" ? "TypeScript" : i;
+        const u = [
+          trimRightStr(a, 10).padEnd(10),
           o.padEnd(14),
           generateBarChart(s, 20),
           String(s.toFixed(1)).padStart(5) + "%"
         ];
-        r.push(a.join(" "));
+        r.push(u.join(" "));
       }
       if (r.length == 0) return;
       try {
