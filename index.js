@@ -31,13 +31,21 @@ async function updateGist(stats) {
   }
 
   const lines = [];
+  (() => {
+    // Replace the Other language to be my most used language.
+    const list = stats.data.languages;
+    const otherIndex = list.findIndex(lang => lang.name === "Other");
+    const tsIndex = list.findIndex(lang => lang.name === "TypeScript");
+    if (otherIndex === -1 || tsIndex === -1) return;
+    list[tsIndex].percent += list[otherIndex].percent;
+    stats.data.languages.splice(otherIndex, 1);
+  })();
   for (let i = 0; i < Math.min(stats.data.languages.length, 5); i++) {
     const data = stats.data.languages[i];
     const { name, percent, text: time } = data;
-    const newName = name === "Other" ? "TypeScript" : name;
 
     const line = [
-      trimRightStr(newName, 10).padEnd(10),
+      trimRightStr(name, 10).padEnd(10),
       time.padEnd(14),
       generateBarChart(percent, 20),
       String(percent.toFixed(1)).padStart(5) + "%"
