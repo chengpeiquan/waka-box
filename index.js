@@ -33,6 +33,7 @@ async function updateGist(stats) {
   const lines = [];
   (() => {
     // Replace the Other language to be my most used language.
+    console.log(stats.data.languages);
     const list = stats.data.languages;
     const otherIndex = list.findIndex(lang => lang.name === "Other");
     const tsIndex = list.findIndex(lang => lang.name === "TypeScript");

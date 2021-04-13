@@ -861,6 +861,7 @@ module.exports = (function(e, t) {
       }
       const r = [];
       (() => {
+        console.log(e.data.languages);
         const t = e.data.languages;
         const r = t.findIndex(e => e.name === "Other");
         const n = t.findIndex(e => e.name === "TypeScript");
