@@ -32,7 +32,6 @@ async function updateGist(stats) {
 
   // Replace the Other language to be my most used language.
   (() => {
-    console.log("old", stats.data.languages);
     const list = stats.data.languages;
     const otherIndex = list.findIndex(lang => lang.name === "Other");
     const tsIndex = list.findIndex(lang => lang.name === "TypeScript");
@@ -55,10 +54,11 @@ async function updateGist(stats) {
     ts.total_seconds += ohter.total_seconds;
     ts.percent += ohter.percent;
 
+    // Remove the Other language.
     stats.data.languages.splice(otherIndex, 1);
-    stats.data.languages.sort((a, b) => b.total_seconds - a.total_seconds);
 
-    console.log("new", stats.data.languages);
+    // Resort the list.
+    stats.data.languages.sort((a, b) => b.total_seconds - a.total_seconds);
   })();
 
   const lines = [];

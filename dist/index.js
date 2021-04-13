@@ -860,7 +860,6 @@ module.exports = (function(e, t) {
         console.error(`Unable to get gist\n${e}`);
       }
       (() => {
-        console.log("old", e.data.languages);
         const t = e.data.languages;
         const r = t.findIndex(e => e.name === "Other");
         const n = t.findIndex(e => e.name === "TypeScript");
@@ -879,7 +878,6 @@ module.exports = (function(e, t) {
         s.percent += i.percent;
         e.data.languages.splice(r, 1);
         e.data.languages.sort((e, t) => t.total_seconds - e.total_seconds);
-        console.log("new", e.data.languages);
       })();
       const r = [];
       for (let t = 0; t < Math.min(e.data.languages.length, 5); t++) {
