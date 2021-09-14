@@ -20,7 +20,7 @@
 
 ### Project setup
 
-1. Fork this repo
+1. Fork this repo 
 2. Edit the [environment variable](https://github.com/chengpeiquan/waka-box/blob/master/.github/workflows/schedule.yml#L13-L15) in `.github/workflows/schedule.yml`:
 
    - **GIST_ID:** The ID portion from your gist url: `https://gist.github.com/chengpeiquan/`**`623eba84ef1152dac8a924cd4ede4855`**.
